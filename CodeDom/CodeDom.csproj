@@ -43,8 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayExtension.cs" />
+    <Compile Include="ArrayGenerator.cs" />
+    <Compile Include="CodeGenerators\CodeDomSortGenerating_CommonFields.cs" />
+    <Compile Include="CodeGenerators\CodeDomSortGenerating.cs" />
+    <Compile Include="CodeGenerators\CodeDomSortGeneration_Constanst.cs" />
+    <Compile Include="CodeGenerators\CodeDomSortGeneration_Partition.cs" />
+    <Compile Include="CodeGenerators\CodeDomSortGeneration_SortMethodImp.cs" />
+    <Compile Include="CodeGenerators\CodeDomSortGenerator_SortMethod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
