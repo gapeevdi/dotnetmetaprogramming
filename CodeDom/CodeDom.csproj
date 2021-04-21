@@ -45,10 +45,11 @@
   <ItemGroup>
     <Compile Include="ArrayExtension.cs" />
     <Compile Include="ArrayGenerator.cs" />
-    <Compile Include="CodeGenerators\CodeDomSortGenerating_CommonFields.cs" />
+    <Compile Include="CodeGenerators\CodeDomQuickSortTypeBuilder.cs" />
+    <Compile Include="CodeGenerators\CodeDomQuickSortTypeBuilder_Partition.cs" />
+    <Compile Include="CodeGenerators\CodeDomSortGenerating_CommonExpressions.cs" />
     <Compile Include="CodeGenerators\CodeDomSortGenerating.cs" />
     <Compile Include="CodeGenerators\CodeDomSortGeneration_Constanst.cs" />
-    <Compile Include="CodeGenerators\CodeDomSortGeneration_Partition.cs" />
     <Compile Include="CodeGenerators\CodeDomSortGeneration_SortMethodImp.cs" />
     <Compile Include="CodeGenerators\CodeDomSortGenerator_SortMethod.cs" />
     <Compile Include="Program.cs" />

@@ -4,6 +4,7 @@ namespace CodeDomSort
 {
     public partial class CodeDomSortGenerating
     {
+        
         private CodeMemberMethod CreateSortImplementation()
         {
             var sortMethodImplementation = new CodeMemberMethod
@@ -12,35 +13,35 @@ namespace CodeDomSort
                 Attributes = MemberAttributes.Private | MemberAttributes.Final
             };
 
-            sortMethodImplementation.TypeParameters.Add(_genericComparableType);
+            sortMethodImplementation.TypeParameters.Add(GetGenericComparableType());
             sortMethodImplementation.Parameters.AddRange(CreateSortImplementationParameters());
 
             var guardStatement = new CodeConditionStatement(new CodeBinaryOperatorExpression(
-                    _lowIndexArgumentReference,
+                    CommonExpressions.LowIndexArgumentReference,
                     CodeBinaryOperatorType.LessThan,
-                    _topIndexArgumentReference),
+                    CommonExpressions.TopIndexArgumentReference),
                 new CodeVariableDeclarationStatement(typeof(int), "borderIndex",
                     new CodeMethodInvokeExpression(
                         new CodeMethodReferenceExpression(null, Constants.Partition.PartitionMethodName),
-                        _arrayArgumentReference,
-                        _lowIndexArgumentReference,
-                        _topIndexArgumentReference,
-                        _pivotElementStrategyArgumentReference)),
+                        CommonExpressions.ArrayArgumentReference,
+                        CommonExpressions.LowIndexArgumentReference,
+                        CommonExpressions.TopIndexArgumentReference,
+                        CommonExpressions.PivotElementStrategyArgumentReference)),
 
                 new CodeExpressionStatement(new CodeMethodInvokeExpression(
                     new CodeMethodReferenceExpression(null, Constants.QuickSortImplementationMethodName),
-                    _arrayArgumentReference,
-                    _lowIndexArgumentReference,
+                    CommonExpressions.ArrayArgumentReference,
+                    CommonExpressions.LowIndexArgumentReference,
                     new CodeVariableReferenceExpression("borderIndex"),
-                    _pivotElementStrategyArgumentReference)),
+                    CommonExpressions.PivotElementStrategyArgumentReference)),
 
                 new CodeExpressionStatement(new CodeMethodInvokeExpression(
                     new CodeMethodReferenceExpression(null, Constants.QuickSortImplementationMethodName),
-                    _arrayArgumentReference,
+                    CommonExpressions.ArrayArgumentReference,
                     new CodeBinaryOperatorExpression(new CodeVariableReferenceExpression("borderIndex"),
                         CodeBinaryOperatorType.Add, new CodePrimitiveExpression(1)),
-                    _topIndexArgumentReference,
-                    _pivotElementStrategyArgumentReference))
+                    CommonExpressions.TopIndexArgumentReference,
+                    CommonExpressions.PivotElementStrategyArgumentReference))
             );
 
             sortMethodImplementation.Statements.Add(guardStatement);
@@ -50,7 +51,7 @@ namespace CodeDomSort
 
         private CodeParameterDeclarationExpression[] CreateSortImplementationParameters()
         {
-            var arrayParameter = new CodeParameterDeclarationExpression(new CodeTypeReference("T[]"),
+            var arrayParameter = new CodeParameterDeclarationExpression(new CodeTypeReference(Constants.GenericArrayTypeName),
                 Constants.ArrayParameterName);
 
             var lowIndexParameter = new CodeParameterDeclarationExpression(typeof(int), Constants.LowIndexParameterName);

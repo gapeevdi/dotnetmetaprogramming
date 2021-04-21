@@ -10,6 +10,25 @@ namespace CodeDomSort
     {
        
         
+        /// <summary>
+        /// Returns IComparable<T> declaration
+        /// </summary>
+        /// <returns></returns>
+        private CodeTypeParameter GetGenericComparableType()
+        {
+            return new CodeTypeParameter()
+            {
+
+                Name = Constants.GenericTypeName,
+                Constraints =
+                {
+                    new CodeTypeReference("IComparable",
+                        new CodeTypeReference(CodeDomSortGenerating.Constants.GenericTypeName))
+                }
+            };
+        }
+        
+        
         public string BuildSortAssembly() => GenerateAssemblyCode(CreateCodeNamespace());
 
         public Assembly FormAssembly() => FormAssembly(CreateCodeNamespace());
@@ -34,21 +53,6 @@ namespace CodeDomSort
             return sortNamespace;
         }
 
-        private CodeTypeDeclaration CreateQuickSortType()
-        {
-            var quickSortType = new CodeTypeDeclaration
-            {
-                Name = "QuickSorter",
-                Attributes = MemberAttributes.Public,
-                Comments = {new CodeCommentStatement("The type supplies quick sort algorithms to sort an array")}
-            };
-
-            quickSortType.Members.Add(CreateSortMethod());
-            quickSortType.Members.Add(CreateSortImplementation());
-            quickSortType.Members.Add(CreatePartitionMethod());
-            return quickSortType;
-        }
-
         /// <summary>
         /// Defining interface IPivotElementStrategy which implementation provides
         /// strategy to choose a pivot for the algorithm 
@@ -67,7 +71,7 @@ namespace CodeDomSort
                 Name = Constants.PivotStrategy.PivotMethodName,
                 Attributes = MemberAttributes.Public,
                 ReturnType = new CodeTypeReference(Constants.GenericTypeName),
-                TypeParameters = {_genericComparableType}
+                TypeParameters = {GetGenericComparableType()}
             };
 
             pivotMethodDeclaration.Parameters.Add(
