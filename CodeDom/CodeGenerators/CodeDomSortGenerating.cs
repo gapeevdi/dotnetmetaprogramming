@@ -20,8 +20,8 @@ namespace CodeDomSort
             sortNamespace.Types.Add(CreatePivotElementStrategyInterface());
             
             
-            // sortNamespace.Types.Add(CreateFirstElementAsPivotStrategyType());
-            // sortNamespace.Types.Add(CreateLastElementAsPivotStrategyType());
+            sortNamespace.Types.Add(CreateFirstElementAsPivotStrategyType());
+            //sortNamespace.Types.Add(CreateLastElementAsPivotStrategyType());
 
             return sortNamespace;
         }
@@ -48,6 +48,13 @@ namespace CodeDomSort
                 Name = Constants.PivotStrategy.PivotInterfaceName
             };
 
+            pivotElementInterface.Members.Add(PivotMethodDeclaration());
+
+            return pivotElementInterface;
+        }
+
+        private CodeMemberMethod PivotMethodDeclaration()
+        {
             var pivotMethodDeclaration = new CodeMemberMethod
             {
                 Name = Constants.PivotStrategy.PivotMethodName,
@@ -63,9 +70,30 @@ namespace CodeDomSort
             pivotMethodDeclaration.Parameters.Add(
                 new CodeParameterDeclarationExpression(typeof(int), Constants.TopIndexParameterName));
 
-            pivotElementInterface.Members.Add(pivotMethodDeclaration);
+            return pivotMethodDeclaration;
 
-            return pivotElementInterface;
+        }
+
+        private CodeTypeDeclaration CreateFirstElementAsPivotStrategyType()
+        {
+            var firstElementPivotStrategyType = new CodeTypeDeclaration()
+            {
+                IsClass = true,
+                Name = Constants.PivotStrategy.FirstElementPivotStrategy
+            };
+
+            firstElementPivotStrategyType.BaseTypes.Add(
+                new CodeTypeReference(Constants.PivotStrategy.PivotInterfaceName));
+
+            var pivotMethod = PivotMethodDeclaration();
+
+            pivotMethod.Statements.Add(new CodeMethodReturnStatement(new CodeArrayIndexerExpression(
+                new CodeArgumentReferenceExpression(Constants.ArrayParameterName),
+                new CodeArgumentReferenceExpression(Constants.LowIndexParameterName))));
+            
+            firstElementPivotStrategyType.Members.Add(pivotMethod);
+
+            return firstElementPivotStrategyType;
         }
 
 
