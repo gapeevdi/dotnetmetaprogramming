@@ -5,7 +5,7 @@ namespace CodeDomSort
     public partial class CodeDomQuickSortTypeBuilder
     {
         
-        private CodeTypeDeclaration BuildType()
+        public CodeTypeDeclaration BuildType()
         {
             var quickSortType = new CodeTypeDeclaration
             {
@@ -15,8 +15,9 @@ namespace CodeDomSort
             };
 
             quickSortType.Members.Add(CreateSortMethod());
-            quickSortType.Members.Add(CreateSortImplementation());
+            quickSortType.Members.Add(new CodeDomSortGenerating().CreateSortImplementation());
             quickSortType.Members.Add(CreatePartitionMethod());
+            
             return quickSortType;
         }
 
@@ -29,7 +30,7 @@ namespace CodeDomSort
             };
 
             sortMethod.Parameters.AddRange(BuildSortMethodParameters());
-            sortMethod.TypeParameters.Add(GetGenericComparableType());
+            sortMethod.TypeParameters.Add(CodeDomSortGenerating.CommonExpressions.GenericComparableType);
             sortMethod.Statements.Add(BuildSortMethodInvokeExpression());
             
             return sortMethod;

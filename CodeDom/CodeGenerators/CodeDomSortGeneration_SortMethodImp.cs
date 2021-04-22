@@ -5,7 +5,7 @@ namespace CodeDomSort
     public partial class CodeDomSortGenerating
     {
         
-        private CodeMemberMethod CreateSortImplementation()
+        public CodeMemberMethod CreateSortImplementation()
         {
             var sortMethodImplementation = new CodeMemberMethod
             {
@@ -13,7 +13,7 @@ namespace CodeDomSort
                 Attributes = MemberAttributes.Private | MemberAttributes.Final
             };
 
-            sortMethodImplementation.TypeParameters.Add(GetGenericComparableType());
+            sortMethodImplementation.TypeParameters.Add(CommonExpressions.GenericComparableType);
             sortMethodImplementation.Parameters.AddRange(CreateSortImplementationParameters());
 
             var guardStatement = new CodeConditionStatement(new CodeBinaryOperatorExpression(

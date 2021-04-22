@@ -8,26 +8,6 @@ namespace CodeDomSort
 {
     public partial class CodeDomSortGenerating
     {
-       
-        
-        /// <summary>
-        /// Returns IComparable<T> declaration
-        /// </summary>
-        /// <returns></returns>
-        private CodeTypeParameter GetGenericComparableType()
-        {
-            return new CodeTypeParameter()
-            {
-
-                Name = Constants.GenericTypeName,
-                Constraints =
-                {
-                    new CodeTypeReference("IComparable",
-                        new CodeTypeReference(CodeDomSortGenerating.Constants.GenericTypeName))
-                }
-            };
-        }
-        
         
         public string BuildSortAssembly() => GenerateAssemblyCode(CreateCodeNamespace());
 
@@ -36,10 +16,12 @@ namespace CodeDomSort
         private CodeNamespace CreateCodeNamespace()
         {
             var sortNamespace = CreateNamespace();
-            sortNamespace.Types.Add(CreateQuickSortType());
+            sortNamespace.Types.Add(new CodeDomQuickSortTypeBuilder().BuildType());
             sortNamespace.Types.Add(CreatePivotElementStrategyInterface());
-            sortNamespace.Types.Add(CreateFirstElementAsPivotStrategyType());
-            sortNamespace.Types.Add(CreateLastElementAsPivotStrategyType());
+            
+            
+            // sortNamespace.Types.Add(CreateFirstElementAsPivotStrategyType());
+            // sortNamespace.Types.Add(CreateLastElementAsPivotStrategyType());
 
             return sortNamespace;
         }
@@ -71,7 +53,7 @@ namespace CodeDomSort
                 Name = Constants.PivotStrategy.PivotMethodName,
                 Attributes = MemberAttributes.Public,
                 ReturnType = new CodeTypeReference(Constants.GenericTypeName),
-                TypeParameters = {GetGenericComparableType()}
+                TypeParameters = {CommonExpressions.GenericComparableType}
             };
 
             pivotMethodDeclaration.Parameters.Add(

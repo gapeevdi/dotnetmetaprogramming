@@ -17,6 +17,22 @@ namespace CodeDomSort
 
             public static readonly CodeArgumentReferenceExpression PivotElementStrategyArgumentReference =
                 new CodeArgumentReferenceExpression(Constants.PivotElementStrategyParameterName);
+
+
+            /// <summary>
+            /// Returns IComparable<T> declaration
+            /// </summary>
+            /// <returns></returns>
+            public static readonly CodeTypeParameter GenericComparableType = new CodeTypeParameter()
+            {
+
+                Name = Constants.GenericTypeName,
+                Constraints =
+                {
+                    new CodeTypeReference("IComparable",
+                        new CodeTypeReference(CodeDomSortGenerating.Constants.GenericTypeName))
+                }
+            };
         }
 
     }

@@ -16,17 +16,17 @@ namespace CodeDomSort
             // Console.WriteLine(array.ToFlatText());
 
              var code = new CodeDomSortGenerating().BuildSortAssembly();
-            // Console.WriteLine(code);
+             Console.WriteLine(code);
 
             //var sorter = new QuickSorter();
             // sorter.QuickSort(array, new LastElementPivotStrategy());
              //sorter.QuickSort(array, new FirstElementPivotStrategy());
              //sorter.QuickSort(array, new LastElementPivotStrategy());
 
-            var assembly = new CodeDomSortGenerating().FormAssembly();
-
-             var codeDomSorter = CreateSorter(assembly);
-             codeDomSorter.QuickSort<int>(array, CreateLastElementPivotStrategy(assembly));
+            // var assembly = new CodeDomSortGenerating().FormAssembly();
+            //
+            //  var codeDomSorter = CreateSorter(assembly);
+            //  codeDomSorter.QuickSort<int>(array, CreateLastElementPivotStrategy(assembly));
             
             Console.WriteLine(array.ToFlatText());
             

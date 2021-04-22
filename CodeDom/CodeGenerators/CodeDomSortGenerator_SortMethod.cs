@@ -25,7 +25,7 @@ namespace CodeDomSort
                 pivotStrategyParameter
             });
            
-            sortMethod.TypeParameters.Add(GetGenericComparableType());
+            sortMethod.TypeParameters.Add(CodeDomSortGenerating.CommonExpressions.GenericComparableType);
             sortMethod.Statements.Add(new CodeMethodInvokeExpression(
                 new CodeMethodReferenceExpression(null, Constants.QuickSortImplementationMethodName),
                 new CodeArgumentReferenceExpression(Constants.ArrayParameterName), new CodePrimitiveExpression(0),

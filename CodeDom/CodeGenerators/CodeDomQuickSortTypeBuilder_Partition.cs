@@ -14,7 +14,7 @@ namespace CodeDomSort
                 ReturnType = new CodeTypeReference(typeof(int))
             };
 
-            partitionMethod.TypeParameters.Add(GetGenericComparableType());
+            partitionMethod.TypeParameters.Add(CodeDomSortGenerating.CommonExpressions.GenericComparableType);
 
             partitionMethod.Parameters.AddRange(DeclarePartitionMethodParameters());
 
