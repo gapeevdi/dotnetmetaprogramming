@@ -25,7 +25,7 @@ namespace CodeDomSort
         {
             var sortMethod = new CodeMemberMethod
             {
-                Name = CodeDomSortGenerating.Constants.QuickSorterTypeName, 
+                Name = CodeDomSortGenerating.Constants.QuickSortMethodName, 
                 Attributes = MemberAttributes.Public | MemberAttributes.Final
             };
 

@@ -147,8 +147,9 @@ namespace CodeDomSort
                 ReferencedAssemblies = {"System.dll"}
             };
 
-            var compilerParameters = new CompilerParameters
-                {OutputAssembly = Constants.OutputAssemblyName, GenerateInMemory = true};
+            var compilerParameters = new CompilerParameters {
+                OutputAssembly = Constants.OutputAssemblyName, 
+                GenerateInMemory = true};
 
             var csharpProvider = CodeDomProvider.CreateProvider(Constants.ProgrammingLanguage);
             var compilationResult = csharpProvider.CompileAssemblyFromDom(compilerParameters, compilationUnit);
