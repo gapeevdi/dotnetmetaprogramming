@@ -1,2 +1,3 @@
 /.idea/.idea.dotnetmetaprogramming/*
 /CodeDom/bin/*
+/CodeDom/obj/Debug/
