@@ -21,7 +21,7 @@ namespace CodeDomSort
             
             
             sortNamespace.Types.Add(CreateFirstElementAsPivotStrategyType());
-            //sortNamespace.Types.Add(CreateLastElementAsPivotStrategyType());
+            sortNamespace.Types.Add(CreateLastElementAsPivotStrategyType());
 
             return sortNamespace;
         }
@@ -94,6 +94,27 @@ namespace CodeDomSort
             firstElementPivotStrategyType.Members.Add(pivotMethod);
 
             return firstElementPivotStrategyType;
+        }
+
+        private CodeTypeDeclaration CreateLastElementAsPivotStrategyType()
+        {
+            var lastElementPivotStrategyType = new CodeTypeDeclaration()
+            {
+                IsClass = true,
+                Name = Constants.PivotStrategy.LastElementPivotStrategy
+            };
+
+            lastElementPivotStrategyType.BaseTypes.Add(new CodeTypeReference(Constants.PivotStrategy.PivotInterfaceName));
+
+            var pivotMethod = PivotMethodDeclaration();
+            
+            pivotMethod.Statements.Add(new CodeMethodReturnStatement(new CodeArrayIndexerExpression(
+                new CodeArgumentReferenceExpression(Constants.ArrayParameterName),
+                new CodeArgumentReferenceExpression(Constants.TopIndexParameterName))));
+            
+            lastElementPivotStrategyType.Members.Add(pivotMethod);
+
+            return lastElementPivotStrategyType;
         }
 
 
