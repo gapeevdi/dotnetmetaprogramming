@@ -19,16 +19,5 @@ namespace CodeDom
 
             return array;
         }
-        
-        private static int[] GenerateArray(int length, int value)
-        {
-            var array = new int[length];
-            for (var i = 0; i < length; i++)
-            {
-                array[i] = value;
-            }
-
-            return array;
-        }
     }
 }
