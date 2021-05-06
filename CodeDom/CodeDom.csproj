@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ArrayExtension.cs" />
     <Compile Include="ArrayGenerator.cs" />
+    <Compile Include="AssemblyExtensions.cs" />
     <Compile Include="CodeGenerators\CodeDomPivotElementStrategyBuilder.cs" />
     <Compile Include="CodeGenerators\CodeDomQuickSortTypeBuilder.cs" />
     <Compile Include="CodeGenerators\CodeDomQuickSortTypeBuilder_Partition.cs" />
