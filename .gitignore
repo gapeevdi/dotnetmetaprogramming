@@ -2,3 +2,4 @@
 /CodeDom/bin/*
 /CodeDom/obj/
 .vs/
+/CodeDom/obj/Debug
