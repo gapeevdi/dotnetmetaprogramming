@@ -13,6 +13,7 @@ namespace CodeDomSort
             Console.WriteLine(array.ToFlatText());
             Console.WriteLine(array.ToItemCounts());
             
+            //Generating an assembly with QuickSort algorithm inside and upload it to the current AppDomain
             var sortingAssembly = new CodeDomSortGenerating().FormAssembly();
             
             var codeDomSorter = sortingAssembly.Instantiate(
