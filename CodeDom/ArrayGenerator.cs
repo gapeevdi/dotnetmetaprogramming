@@ -4,7 +4,7 @@ namespace CodeDom
 {
     public static class ArrayGenerator
     {
-        public static int[] GenerateArray(int length)
+        public static int[] Generate(int length)
         {
             var rnd = new Random();
             var array = new int[length];

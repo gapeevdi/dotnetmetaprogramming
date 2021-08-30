@@ -9,7 +9,7 @@ namespace CodeDomSort
         static void Main(string[] args)
         {
             
-            var array = ArrayGenerator.GenerateArray(50);
+            var array = ArrayGenerator.Generate(50);
             Console.WriteLine(array.ToFlatText());
             Console.WriteLine(array.ToItemCounts());
             
